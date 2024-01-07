@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=CarPartsDB
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=Pw@Car1Parts
+
+  api:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "80:80"
+    command: uwsgi --http :80 --processes 2 --static-map /static=/static --module autocompany.wsgi:application
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
