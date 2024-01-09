@@ -56,7 +56,7 @@ class CartView(views.APIView):
             self.retrieve_cart()  # define a function to retrieve data
             self.retrieve_cart_items()
 
-            return Response(self.data, status=status.HTTP_201_CREATED)  # return response
+            return Response(self.data, status=status.HTTP_200_OK)  # return response
 
         except CustomException as error_message:
             error_response = {"message": "error: " + str(error_message)}  # define error response
@@ -74,7 +74,7 @@ class CartView(views.APIView):
             self.delete_product()  # define a function to delete data
 
             response = {"status": 200, "message": "Successfully Deleted"}
-            return Response(response, status=status.HTTP_201_CREATED)  # return response
+            return Response(response, status=status.HTTP_200_OK)  # return response
 
         except CustomException as error_message:
             error_response = {"message": "error: " + str(error_message)}  # define error response

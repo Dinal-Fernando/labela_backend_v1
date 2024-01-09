@@ -61,7 +61,7 @@ class ProductView(views.APIView):
             self.update_data()  # define a function to update data
 
             response = {"status": 200, "message": "Successfully updated"}
-            return Response(response, status=status.HTTP_201_CREATED)  # return response
+            return Response(response, status=status.HTTP_200_OK)  # return response
 
         except CustomException as error_message:
             transaction.set_rollback(True)  # rollback if any error occurs
@@ -79,7 +79,7 @@ class ProductView(views.APIView):
             self.delete_data()  # define a function to delete data
 
             response = {"status": 200, "message": "Successfully Deleted"}
-            return Response(response, status=status.HTTP_201_CREATED)  # return response
+            return Response(response, status=status.HTTP_200_OK)  # return response
 
         except CustomException as error_message:
             error_response = {"message": "error: " + str(error_message)}  # define error response
@@ -100,7 +100,7 @@ class ProductView(views.APIView):
             else:
                 self.get_list()
 
-            return Response(self.data, status=status.HTTP_201_CREATED)  # return response
+            return Response(self.data, status=status.HTTP_200_OK)  # return response
 
         except CustomException as error_message:
             error_response = {"message": "error: " + str(error_message)}  # define error response
